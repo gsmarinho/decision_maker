@@ -13,8 +13,8 @@ x= response.json()
 if x ["cod"] !="404":
     y = x["main"]
     current_temperature = y["temp"]
-    temp = int (current_temperature) # temp in kelvin
-    temp = temp * (9 / 5) - 459.67 #from Kelvin to Fahrenheit
+    temp = current_temperature # temp in kelvin
+    temp = int(temp * (9 / 5) - 459.67) #from Kelvin to Fahrenheit and converting to integer
     print(city_name)
     print("Temperature: ", temp)
 else:
