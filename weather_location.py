@@ -46,7 +46,7 @@ item = """[ {"type":"short", "image_url":"https://encrypted-tbn0.gstatic.com/ima
 closet = json.loads(item)
 
 
-api_key = "db1b94f0666622aeaf55828924e219a3"
+api_key = "db1b94f0666622aeaf55828924e219a3" # openweathermap.org API to check current weather
 base_url = "http://api.openweathermap.org/data/2.5/weather?"
 #city_name= input ("Enter City name: ")
 #requests.get('https://api.ipdata.co', verify=False)
@@ -57,29 +57,29 @@ city_name = str(form.getvalue('city'))
 complete_url = base_url + "appid=" + api_key + "&q=" + city_name
 response = requests.get(complete_url)
 x= response.json()
-weekno = datetime.datetime.today().weekday()
+weekno = datetime.datetime.today().weekday()# check if is weekday or weekend
 print ("Content-type:text/html\r\n\r\n")
-if x ["cod"] !="404":
+if x ["cod"] !="404":# if response not error 404, city found
 	y = x["main"]
 	current_temperature = y["temp"]
 	temp = current_temperature # temp in kelvin
 	temp = int((temp - 273.15) * 1.8000 + 32) #from Kelvin to Fahrenheit and converting to integer
-	if temp > 99:
-		if weekno < 5:
+	if temp > 99:#hot weather
+		if weekno < 5:#check if is weekday
 			lookup_closet(closet,"pants","formal")
 			lookup_closet(closet,"shirt","formal")
 			
 		else:
 			lookup_closet(closet,"short")
 			lookup_closet(closet,"t-shirt")
-	if temp > 69:
+	if temp > 69: #warm weather
 		if weekno < 5:
                         lookup_closet(closet,"pants","formal")
                         lookup_closet(closet,"shirt","formal")
 		else:
                         lookup_closet(closet,"pants","casual")
                         lookup_closet(closet,"t-shirt","casual")
-	if temp < 69:
+	if temp < 69:#cold weather
 		if weekno < 5:
 			lookup_closet(closet,"pants","formal")
 			lookup_closet(closet,"shirt","formal")               
