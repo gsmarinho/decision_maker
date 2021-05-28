@@ -18,6 +18,7 @@ def lookup_closet(closet,clothing_type,clothing_style):
 	#print(i)
 	print("<img src=\"")
 	print(l[i])
+	#print("width='800' height='900'")
 	print("\">")
 	#return(l[i])
 
@@ -34,13 +35,17 @@ item = """[ {"type":"short", "image_url":"https://encrypted-tbn0.gstatic.com/ima
 , {"type":"shirt","image_url":"https://i.pinimg.com/originals/4c/51/58/4c51580aaeea7c57aedbebfd564ca8c4.jpg","style":"formal"}
 , {"type":"shirt","image_url":"https://images-na.ssl-images-amazon.com/images/I/818rZxa6D8L._AC_UY1000_.jpg","style":"formal"}
 , {"type":"shirt","image_url":"https://i.pinimg.com/originals/83/cb/fd/83cbfdc0579c0b4def77086d95dc5e97.jpg","style":"casual"}
-, {"type":"jacket","image_url":"https://www.dhresource.com/0x0/f2/albu/g10/M01/75/E3/rBVaVly9Os6AGim8AAHYUSnlV0Y613.jpg"}
-, {"type":"jacket","image_url":"https://i.pinimg.com/originals/48/5b/fe/485bfe1d051a3b3664f20cb7e40e2f49.jpg"}
-, {"type":"jacket","image_url":"https://image.made-in-china.com/43f34j00QyPTHkcMHgqv/Mens-Heavy-Insulated-Parka-Jacket-Winter-Jacket.jpg"}
+, {"type":"jacket","image_url":"https://www.dhresource.com/0x0/f2/albu/g10/M01/75/E3/rBVaVly9Os6AGim8AAHYUSnlV0Y613.jpg","style":"casual"}
+, {"type":"jacket","image_url":"https://i.pinimg.com/originals/48/5b/fe/485bfe1d051a3b3664f20cb7e40e2f49.jpg","style":"casual"}
+, {"type":"jacket","image_url":"https://image.made-in-china.com/43f34j00QyPTHkcMHgqv/Mens-Heavy-Insulated-Parka-Jacket-Winter-Jacket.jpg","style":"casual"}
 , {"type":"pants","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNVvFkjUWVBSjo76-xZ6O6nQ5yjiF29bVo0A&usqp=CAU","style":"formal"}
 , {"type":"pants","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbZYBhwN9mWWvy81OWi59GkwGvy0BdzCfpg&usqp=CAU","style":"formal"}
 , {"type":"shirt","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXrgUNLqS52jSSd3Z_NYHwjm0x4bHd2vlGBw&usqp=CAU","style":"formal"}
 , {"type":"shirt","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1vETto2N_kSCgeQDlsZSRQiwByoHc82DwHg&usqp=CAU","style":"formal"}
+, {"type":"jacket","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNTZQFtewhv69pAKj0AAR4YyAwmMzIAz6QxtervKmN1_vKu3YDLxJs92jNyuJ5quDUV64&usqp=CAU","style":"formal"}
+, {"type":"jacket","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM5WKmUrqRzYAucmU0UDO9mI02UmxyEbZZXb4CAKhyqFX6poin4wgPC27nh05_WhXwuUk&usqp=CAU","style":"formal"}
+, {"type":"jacket","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPvxohbXu95ZSP9l6hZcO7l5ZTPeKF6D811w&usqp=CAU","style":"formal"}
+
 ]"""
 
 closet = json.loads(item)
@@ -64,28 +69,29 @@ if x ["cod"] !="404":# if response not error 404, city found
 	current_temperature = y["temp"]
 	temp = current_temperature # temp in kelvin
 	temp = int((temp - 273.15) * 1.8000 + 32) #from Kelvin to Fahrenheit and converting to integer
-	if temp > 99:#hot weather
+	if temp >= 99:#hot weather
 		if weekno < 5:#check if is weekday
-			lookup_closet(closet,"pants","formal")
 			lookup_closet(closet,"shirt","formal")
+			lookup_closet(closet,"pants","formal")
 			
 		else:
-			lookup_closet(closet,"short")
-			lookup_closet(closet,"t-shirt")
-	if temp > 69: #warm weather
+			lookup_closet(closet,"short","casual")
+			lookup_closet(closet,"t-shirt","casual")
+	if temp > 69 and temp < 99 : #warm weather
 		if weekno < 5:
-                        lookup_closet(closet,"pants","formal")
                         lookup_closet(closet,"shirt","formal")
+                        lookup_closet(closet,"pants","formal")
 		else:
-                        lookup_closet(closet,"pants","casual")
-                        lookup_closet(closet,"t-shirt","casual")
+			lookup_closet(closet,"t-shirt","casual")
+			lookup_closet(closet,"pants","casual")
 	if temp < 69:#cold weather
-		if weekno < 5:
+		if weekno < 5:			               
+			lookup_closet(closet,"jacket","formal")
+			lookup_closet(closet,"shirt","formal")
 			lookup_closet(closet,"pants","formal")
-			lookup_closet(closet,"shirt","formal")               
-			lookup_closet(closet,"jacket")
 		else:
-                        lookup_closet(closet,"pants","casual")
-                        lookup_closet(closet,"shirt","casual")
+			lookup_closet(closet,"jacket","casual")
+			lookup_closet(closet,"shirt","casual")
+			lookup_closet(closet,"pants","casual")
 else:
 	print ("City not found")
