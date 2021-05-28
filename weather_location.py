@@ -1,12 +1,31 @@
 #!/usr/bin/python
 
-import requests, json, cgi, cgitb, datetime
+import requests, json, cgi, cgitb, datetime, random
+
+def lookup_closet(closet,clothing_type):
+	l = []
+	for clothing in closet:
+		if clothing["type"] == clothing_type:
+		#	print("<img src=\"")
+		#	print(clothing["image_url"])
+		#	print("\">")
+		#	return()
+			l.append(clothing["image_url"])
+	#print(l)
+	count = len(l)
+	#print(count)
+	i = random.randint(0,count - 1 )
+	#print(i)
+	print("<img src=\"")
+	print(l[i])
+	print("\">")
+	#return(l[i])
 
 #Tom's closet :)
 
-item ="""[ {"type":"short", "image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBc7hkfdWplcp6NeCEkURgIDlhU0BPpnf7DA&usqp=CAU", "style":"casual", "temp":"hot", "color":"blue" }
-, {"type":"short", "image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbhG-XL8_8Trh40BoRiu9PxDndRWBYDZx1-A&usqp=CAU","style":"casual","temp":"hot", "color":"mixed" },
-, {"type:"t-shirt","image_url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCjdQ1tHXFvO9gfosohEDwQjFmpImaJXHCdQ&usqp=CAU","style":"casual", "temp":"hot", "color":"white" }
+item = """[ {"type":"short", "image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBc7hkfdWplcp6NeCEkURgIDlhU0BPpnf7DA&usqp=CAU", "style":"casual", "temp":"hot", "color":"blue" }
+, {"type":"short", "image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbhG-XL8_8Trh40BoRiu9PxDndRWBYDZx1-A&usqp=CAU","style":"casual","temp":"hot", "color":"mixed" }
+, {"type":"t-shirt","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCjdQ1tHXFvO9gfosohEDwQjFmpImaJXHCdQ&usqp=CAU","style":"casual", "temp":"hot", "color":"white" }
 , {"type":"t-shirt","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7jFRS30wG2T6FmXfJtdSj_LfeCHBbB-DrMw&usqp=CAU","style":"casual", "temp":"hot", "color":"blue"  }
 , {"type":"pants","image_url":"https://data.tieapart.com/imgprodotto/mens-trousers-with-side-pockets-rope-colored_10799.jpg","style":"casual"}
 , {"type":"pants","image_url":"https://images.halloweencostumes.com/products/51536/1-1/holographic-disco-pants-for-men.jpg","style":"party"}
@@ -19,6 +38,7 @@ item ="""[ {"type":"short", "image_url":"https://encrypted-tbn0.gstatic.com/imag
 ,{"type":"jacket","image_url":"https://i.pinimg.com/originals/48/5b/fe/485bfe1d051a3b3664f20cb7e40e2f49.jpg"}
 , {"type":"jacket","image_url":"https://image.made-in-china.com/43f34j00QyPTHkcMHgqv/Mens-Heavy-Insulated-Parka-Jacket-Winter-Jacket.jpg"}
 ]"""
+
 closet = json.loads(item)
 
 
@@ -42,26 +62,26 @@ if x ["cod"] !="404":
 	temp = int((temp - 273.15) * 1.8000 + 32) #from Kelvin to Fahrenheit and converting to integer
 	if temp > 99:
 		if weekno < 5:
-			print(item("pants_formal1"))
-			print(item("shirts1"))
+			lookup_closet(closet,"pants")
+			lookup_closet(closet,"shirt")
 			
 		else:
-			print(item[shorts][0])
-			print(item[t-shirts][0])
+			lookup_closet(closet,"short")
+			lookup_closet(closet,"t-shirt")
 	if temp > 69:
 		if weekno < 5:
-                        print(item[pants][formal][0])
-                        print(item[shirts][0])
+                        lookup_closet(closet,"pants")
+                        lookup_closet(closet,"shirt")
 		else:
-                        print(item[pants][casual][0])
-                        print(item[t-shirts][0])
+                        lookup_closet(closet,"pants")
+                        lookup_closet(closet,"t-shirt")
 	if temp < 69:
 		if weekno < 5:
-			print(item[pants][formal][0])
-			print(item[shirts][0])                        
-			print(item[jacket][0])
+			lookup_closet(closet,"pants")
+			lookup_closet(closet,"shirt")               
+			lookup_closet(closet,"jacket")
 		else:
-                        print(item[pants][casual][0])
-                        print(item[shirts][0])
+                        lookup_closet(closet,"pants")
+                        lookup_closet(closet,"shirt")
 else:
 	print ("City not found")
