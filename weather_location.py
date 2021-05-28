@@ -2,10 +2,10 @@
 
 import requests, json, cgi, cgitb, datetime, random
 
-def lookup_closet(closet,clothing_type):
+def lookup_closet(closet,clothing_type,clothing_style):
 	l = []
 	for clothing in closet:
-		if clothing["type"] == clothing_type:
+		if clothing["type"] == clothing_type and clothing["style"] == clothing_style:
 		#	print("<img src=\"")
 		#	print(clothing["image_url"])
 		#	print("\">")
@@ -35,8 +35,12 @@ item = """[ {"type":"short", "image_url":"https://encrypted-tbn0.gstatic.com/ima
 , {"type":"shirt","image_url":"https://images-na.ssl-images-amazon.com/images/I/818rZxa6D8L._AC_UY1000_.jpg","style":"formal"}
 , {"type":"shirt","image_url":"https://i.pinimg.com/originals/83/cb/fd/83cbfdc0579c0b4def77086d95dc5e97.jpg","style":"casual"}
 , {"type":"jacket","image_url":"https://www.dhresource.com/0x0/f2/albu/g10/M01/75/E3/rBVaVly9Os6AGim8AAHYUSnlV0Y613.jpg"}
-,{"type":"jacket","image_url":"https://i.pinimg.com/originals/48/5b/fe/485bfe1d051a3b3664f20cb7e40e2f49.jpg"}
+, {"type":"jacket","image_url":"https://i.pinimg.com/originals/48/5b/fe/485bfe1d051a3b3664f20cb7e40e2f49.jpg"}
 , {"type":"jacket","image_url":"https://image.made-in-china.com/43f34j00QyPTHkcMHgqv/Mens-Heavy-Insulated-Parka-Jacket-Winter-Jacket.jpg"}
+, {"type":"pants","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNVvFkjUWVBSjo76-xZ6O6nQ5yjiF29bVo0A&usqp=CAU","style":"formal"}
+, {"type":"pants","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtbZYBhwN9mWWvy81OWi59GkwGvy0BdzCfpg&usqp=CAU","style":"formal"}
+, {"type":"shirt","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXrgUNLqS52jSSd3Z_NYHwjm0x4bHd2vlGBw&usqp=CAU","style":"formal"}
+, {"type":"shirt","image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1vETto2N_kSCgeQDlsZSRQiwByoHc82DwHg&usqp=CAU","style":"formal"}
 ]"""
 
 closet = json.loads(item)
@@ -62,26 +66,26 @@ if x ["cod"] !="404":
 	temp = int((temp - 273.15) * 1.8000 + 32) #from Kelvin to Fahrenheit and converting to integer
 	if temp > 99:
 		if weekno < 5:
-			lookup_closet(closet,"pants")
-			lookup_closet(closet,"shirt")
+			lookup_closet(closet,"pants","formal")
+			lookup_closet(closet,"shirt","formal")
 			
 		else:
 			lookup_closet(closet,"short")
 			lookup_closet(closet,"t-shirt")
 	if temp > 69:
 		if weekno < 5:
-                        lookup_closet(closet,"pants")
-                        lookup_closet(closet,"shirt")
+                        lookup_closet(closet,"pants","formal")
+                        lookup_closet(closet,"shirt","formal")
 		else:
-                        lookup_closet(closet,"pants")
-                        lookup_closet(closet,"t-shirt")
+                        lookup_closet(closet,"pants","casual")
+                        lookup_closet(closet,"t-shirt","casual")
 	if temp < 69:
 		if weekno < 5:
-			lookup_closet(closet,"pants")
-			lookup_closet(closet,"shirt")               
+			lookup_closet(closet,"pants","formal")
+			lookup_closet(closet,"shirt","formal")               
 			lookup_closet(closet,"jacket")
 		else:
-                        lookup_closet(closet,"pants")
-                        lookup_closet(closet,"shirt")
+                        lookup_closet(closet,"pants","casual")
+                        lookup_closet(closet,"shirt","casual")
 else:
 	print ("City not found")
